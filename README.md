@@ -14,5 +14,5 @@
 
 ## 神经网络结构指南
 
-![结构指南](https://cdn.nlark.com/yuque/0/2021/png/161237/1609588508511-297e9141-67ce-48cb-a37f-361c22a80e67.png)
+![结构指南](https://cdn.nlark.com/yuque/0/2021/png/161237/1609588508511-297e9141-67ce-48cb-a37f-361c22a80e67.png?x-oss-process=image%2Fresize%2Cw_731)
 
