@@ -26,80 +26,85 @@ namespace NeuralNetwork.NetworkModels
         /// </value>
         public Guid Id { get; set; }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets or sets the input synapses. </summary>
-        ///
-        /// <value> The input synapses. </value>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		public List<Synapse> InputSynapses { get; set; }
+        /// <summary>
+        /// 输入突触
+        /// </summary>
+        /// <value>
+        /// The input synapses.
+        /// </value>
+        public List<Synapse> InputSynapses { get; set; }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets or sets the output synapses. </summary>
-        ///
-        /// <value> The output synapses. </value>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		public List<Synapse> OutputSynapses { get; set; }
+        /// <summary>
+        /// 输出突触
+        /// </summary>
+        /// <value>
+        /// The output synapses.
+        /// </value>
+        public List<Synapse> OutputSynapses { get; set; }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets or sets the bias. </summary>
-        ///
-        /// <value> The bias. </value>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		public double Bias { get; set; }
+        /// <summary>
+        /// 偏差
+        /// </summary>
+        /// <value>
+        /// The bias.
+        /// </value>
+        public double Bias { get; set; }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets or sets the bias delta. </summary>
-        ///
-        /// <value> The bias delta. </value>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		public double BiasDelta { get; set; }
+        /// <summary>
+        /// 偏差Delta
+        /// </summary>
+        /// <value>
+        /// The bias delta.
+        /// </value>
+        public double BiasDelta { get; set; }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets or sets the gradient. </summary>
-        ///
-        /// <value> The gradient. </value>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        ///  梯度
+        /// </summary>
+        /// <value>
+        /// The gradient.
+        /// </value>
+        public double Gradient { get; set; }
 
-		public double Gradient { get; set; }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets or sets the value. </summary>
-        ///
-        /// <value> The value. </value>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
+        /// <value>
+        /// The value.
+        /// </value>
+        public double Value { get; set; }
 
-		public double Value { get; set; }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets or sets a value indicating whether this object is mirror. </summary>
-        ///
-        /// <value> True if this object is mirror, false if not. </value>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is mirror.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is mirror; otherwise, <c>false</c>.
+        /// </value>
         public bool IsMirror { get; set; }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets or sets a value indicating whether this object is canonical. </summary>
-        ///
-        /// <value> True if this object is canonical, false if not. </value>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public bool IsCanonical { get; set; }
-		#endregion
-
-		#region -- Constructors --
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
-        /// Initializes a new instance of the NeuralNetwork.NetworkModels.Neuron class.
+        /// Gets or sets a value indicating whether this instance is canonical.
         /// </summary>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <value>
+        ///   <c>true</c> if this instance is canonical; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsCanonical { get; set; }
+        #endregion
 
-		public Neuron()
+        #region -- Constructors --
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Neuron"/> class.
+        /// </summary>
+        public Neuron()
 		{
 			Id = Guid.NewGuid();
 			InputSynapses = new List<Synapse>();
@@ -107,15 +112,12 @@ namespace NeuralNetwork.NetworkModels
 			Bias = Network.GetRandom();
 		}
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>
-        /// Initializes a new instance of the NeuralNetwork.NetworkModels.Neuron class.
-        /// </summary>
-        ///
-        /// <param name="inputNeurons"> The input neurons. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		public Neuron(IEnumerable<Neuron> inputNeurons) : this()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Neuron"/> class.
+        /// </summary>
+        /// <param name="inputNeurons">The input neurons.</param>
+        public Neuron(IEnumerable<Neuron> inputNeurons) : this()
 		{
 		    Ensure.That(inputNeurons).IsNotNull();
 
@@ -126,58 +128,54 @@ namespace NeuralNetwork.NetworkModels
 				InputSynapses?.Add(synapse);
 			}
 		}
-		#endregion
+        #endregion
 
-		#region -- Values & Weights --
+        #region -- Values & Weights --
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Calculates the value. </summary>
-        ///
-        /// <returns>   The calculated value. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		public virtual double CalculateValue()
+        /// <summary>
+        /// 在神经网络中，向前传播数据以获取输出，然后将其与实际预期值进行比较以获得误差，
+        /// 这是正确数据与机器学习算法预测数据之间的差异。为了最小化该误差，
+        /// 现在你必须求每个权重的误差导数来向后传播，然后从权重中减去该误差导数值。
+        /// </summary>
+        /// <returns></returns>
+        public virtual double CalculateValue()
 		{
 			return Value = Sigmoid.Output(InputSynapses.Sum(a => a.Weight * a.InputNeuron.Value) + Bias);
 		}
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Calculates the error. </summary>
-        ///
-        /// <param name="target">   Target for the. </param>
-        ///
-        /// <returns>   The calculated error. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-		public double CalculateError(double target)
+        /// <summary>
+        /// 计算误差(正确数据与机器学习算法预测数据之间的差异)
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <returns></returns>
+        public double CalculateError(double target)
 		{
 			return target - Value;
 		}
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Calculates the gradient. </summary>
-        ///
-        /// <param name="target">   (Optional) Target for the. </param>
-        ///
-        /// <returns>   The calculated gradient. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		public double CalculateGradient(double? target = null)
+        /// <summary>
+        /// Calculates the gradient.
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <returns></returns>
+        public double CalculateGradient(double? target = null)
 		{
-			if (target == null)
-				return Gradient = OutputSynapses.Sum(a => a.OutputNeuron.Gradient * a.Weight) * Sigmoid.Derivative(Value);
-
+            if (target == null)
+            {
+                return Gradient = OutputSynapses.Sum(a => a.OutputNeuron.Gradient * a.Weight) * Sigmoid.Derivative(Value);
+            }
 			return Gradient = CalculateError(target.Value) * Sigmoid.Derivative(Value);
 		}
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Updates the weights. </summary>
-        ///
-        /// <param name="learnRate">    The learn rate. </param>
-        /// <param name="momentum">     The momentum. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		public void UpdateWeights(double learnRate, double momentum)
+        /// <summary>
+        /// Updates the weights.
+        /// </summary>
+        /// <param name="learnRate">The learn rate.</param>
+        /// <param name="momentum">The momentum.</param>
+        public void UpdateWeights(double learnRate, double momentum)
 		{
 			var prevDelta = BiasDelta;
 			BiasDelta = learnRate * Gradient;

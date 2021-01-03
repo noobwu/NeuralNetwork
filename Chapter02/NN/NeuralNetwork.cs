@@ -99,7 +99,7 @@ namespace NeuralNetwork
 
 
         /// <summary>
-        /// Gets the training data from user.
+        ///  根据用户输入获取训练数据
         /// </summary>
         /// <returns></returns>
         public NNManager GetTrainingDataFromUser()
@@ -216,7 +216,7 @@ namespace NeuralNetwork
 
 
         /// <summary>
-        /// Tests the network.
+        /// 函数允许我们测试神经网络
         /// </summary>
         /// <returns></returns>
         public NNManager TestNetwork()
@@ -227,13 +227,14 @@ namespace NeuralNetwork
             while (true)
             {
                 PrintUnderline(50);
+                //获取用户输入数据
                 var values = GetInputData($"\tType {_numInputParameters} inputs: ");
                 if (values == null)
                 {
                     PrintNewLine();
                     return this;
                 }
-
+                //计算
                 var results = _network?.Compute(values);
                 PrintNewLine();
 
@@ -248,7 +249,7 @@ namespace NeuralNetwork
         }
 
         /// <summary>
-        /// Trains the network to minimum.
+        /// 最小误差值法
         /// </summary>
         /// <returns></returns>
         public NNManager TrainNetworkToMinimum()
@@ -264,7 +265,7 @@ namespace NeuralNetwork
 
 
         /// <summary>
-        /// Trains the network to maximum.
+        /// 最大误差值法
         /// </summary>
         /// <returns></returns>
         public NNManager TrainNetworkToMaximum()
@@ -334,7 +335,7 @@ namespace NeuralNetwork
         }
 
         /// <summary>
-        /// Exports the network.
+        /// 导出网络信息
         /// </summary>
         /// <returns></returns>
         public NNManager ExportNetwork()
@@ -348,7 +349,7 @@ namespace NeuralNetwork
         }
 
         /// <summary>
-        /// Imports the datasets.
+        ///  导入数据集
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns></returns>
@@ -401,7 +402,7 @@ namespace NeuralNetwork
 
 
         /// <summary>
-        /// Gets the input.
+        ///  获取输入信息
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="min">The minimum.</param>

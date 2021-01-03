@@ -7,9 +7,16 @@ using EnsureThat;
 
 namespace NeuralNetwork.Helpers
 {
+    /// <summary>
+    ///  导出相关操作
+    /// </summary>
     public static class ExportHelper
 	{
-		public static void ExportNetwork(Network network)
+        /// <summary>
+        /// 导出网络信息
+        /// </summary>
+        /// <param name="network">The network.</param>
+        public static void ExportNetwork(Network network)
 		{
 			var dn = GetHelperNetwork(network);
 

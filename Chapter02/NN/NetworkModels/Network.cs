@@ -118,13 +118,11 @@ namespace NeuralNetwork.NetworkModels
 
         #region -- Training --
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Trains. </summary>
-        ///
-        /// <param name="dataSets">     Sets the data belongs to. </param>
-        /// <param name="numEpochs">    Number of epochs. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        /// <summary>
+        /// Trains the specified data sets.
+        /// </summary>
+        /// <param name="dataSets">The data sets.</param>
+        /// <param name="numEpochs">The number epochs.</param>
         public void Train(List<NNDataSet> dataSets, int numEpochs)
         {
             for (var i = 0; i < numEpochs; i++)
@@ -137,13 +135,11 @@ namespace NeuralNetwork.NetworkModels
             }
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Trains. </summary>
-        ///
-        /// <param name="dataSets">     Sets the data belongs to. </param>
-        /// <param name="minimumError"> The minimum error. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        /// <summary>
+        /// Trains the specified data sets.
+        /// </summary>
+        /// <param name="dataSets">The data sets.</param>
+        /// <param name="minimumError">The minimum error.</param>
         public void Train(List<NNDataSet> dataSets, double minimumError)
         {
             var error = 1.0;
@@ -154,8 +150,8 @@ namespace NeuralNetwork.NetworkModels
                 var errors = new List<double>();
                 foreach (var dataSet in dataSets)
                 {
-                    ForwardPropagate(dataSet.Values);
-                    BackPropagate(dataSet.Targets);
+                    ForwardPropagate(dataSet.Values);//前向传播
+                    BackPropagate(dataSet.Targets);//反向传播
                     errors.Add(CalculateError(dataSet.Targets));
                 }
                 error = errors.Average();
@@ -163,12 +159,11 @@ namespace NeuralNetwork.NetworkModels
             }
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Forward propagate. </summary>
-        ///
-        /// <param name="inputs">   A variable-length parameters list containing inputs. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// 前向传播运算（前向传播就是从输入层开始（Layer1），经过一层层的Layer，不断计算每一层的z和a，最后得到输出y^的过程。）
+        /// </summary>
+        /// <param name="inputs">The inputs.</param>
         private void ForwardPropagate(params double[] inputs)
         {
             var i = 0;
@@ -177,12 +172,18 @@ namespace NeuralNetwork.NetworkModels
             OutputLayer?.ForEach(a => a.CalculateValue());
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Back propagate. </summary>
-        ///
-        /// <param name="targets">  A variable-length parameters list containing targets. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        /// <summary>
+        /// 反向传播(反向传播（英语：Backpropagation，缩写为BP）是“误差反向传播”的简称，
+        /// 是一种与最优化方法（如梯度下降法）结合使用的，
+        /// 用来训练人工神经网络的常见方法。该方法对网络中所有权重计算损失函数的梯度。
+        /// 这个梯度会反馈给最优化方法，用来更新权值以最小化损失函数。
+        /// 反向传播要求有对每个输入值想得到的已知输出，来计算损失函数梯度。
+        /// 因此，它通常被认为是一种监督式学习方法，虽然它也用在一些无监督网络（如自动编码器）中。
+        /// 它是多层前馈网络的Delta规则的推广，可以用链式法则对每层迭代计算梯度。
+        /// 反向传播要求人工神经元（或“节点”）的激励函数可微。)
+        /// https://zh.wikipedia.org/wiki/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95
+        /// </summary>
+        /// <param name="targets">The targets.</param>
         private void BackPropagate(params double[] targets)
         {
             var i = 0;
@@ -194,28 +195,24 @@ namespace NeuralNetwork.NetworkModels
             OutputLayer?.ForEach(a => a.UpdateWeights(LearningRate, Momentum));
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Computes the given inputs. </summary>
-        ///
-        /// <param name="inputs">   A variable-length parameters list containing inputs. </param>
-        ///
-        /// <returns>   A double[]. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// 网络运算
+        /// </summary>
+        /// <param name="inputs">The inputs.</param>
+        /// <returns></returns>
         public double[] Compute(params double[] inputs)
         {
             ForwardPropagate(inputs);
             return OutputLayer.Select(a => a.Value).ToArray();
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Calculates the error. </summary>
-        ///
-        /// <param name="targets">  A variable-length parameters list containing targets. </param>
-        ///
-        /// <returns>   The calculated error. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Calculates the error.
+        /// </summary>
+        /// <param name="targets">The targets.</param>
+        /// <returns></returns>
         private double CalculateError(params double[] targets)
         {
             var i = 0;
@@ -225,12 +222,11 @@ namespace NeuralNetwork.NetworkModels
 
         #region -- Helpers --
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets the random. </summary>
-        ///
-        /// <returns>   The random. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Gets the random.
+        /// </summary>
+        /// <returns></returns>
         public static double GetRandom()
         {
             return 2 * Random.NextDouble() - 1;

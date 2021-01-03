@@ -83,7 +83,7 @@ namespace NeuralNetwork.Helpers
 				allNeurons.Add(neuron);
 			}
 
-			//Synapses
+			//突触
 			foreach (var syn in dn.Synapses)
 			{
 				var synapse = new Synapse { Id = syn.Id };
