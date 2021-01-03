@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Console = Colorful.Console;
 
 namespace NeuralNetwork
@@ -11,38 +9,42 @@ namespace NeuralNetwork
     using Helpers;
     using NetworkModels;
 
-    /// <summary>   Manager for nns. </summary>
+    /// <summary>
+    /// 神经网络相关操作
+    /// </summary>
     public class NNManager
     {
-        #region -- Variables --
-        /// <summary>   Number of input parameters. </summary>
+        #region -- Variables --       
+        /// <summary>
+        /// 输入参数
+        /// </summary>
         private int _numInputParameters;
-        /// <summary>   Number of hidden layers. </summary>
-		private int _numHiddenLayers;
-        /// <summary>   The hidden neurons. </summary>
-		private int[] _hiddenNeurons;
-        /// <summary>   Number of output parameters. </summary>
-		private int _numOutputParameters;
-        /// <summary>   The network. </summary>
-		private Network _network;
-        /// <summary>   Sets the data belongs to. </summary>
-		private List<NNDataSet> _dataSets;
+        /// <summary>
+        /// 隐藏层
+        /// </summary>
+        private int _numHiddenLayers;
+        /// <summary>
+        /// 隐藏神经元
+        /// </summary>
+        private int[] _hiddenNeurons;
+        /// <summary>
+        /// 输出参数
+        /// </summary>
+        private int _numOutputParameters;
+        /// <summary>
+        /// 网络
+        /// </summary>
+        private Network _network;
+        /// <summary>
+        ///  数据集
+        /// </summary>
+        private List<NNDataSet> _dataSets;
         #endregion
 
-        #region -- Main --
-        /// <summary>   Main entry-point for this application. </summary>
-        [STAThread]
-        private void Main()
-        {
-        }
-        #endregion
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Sets up the network. </summary>
-        ///
-        /// <returns>   A NNManager. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        /// <summary>
+        /// 创建新网络
+        /// </summary>
+        /// <returns></returns>
         public NNManager SetupNetwork()
         {
             _numInputParameters = 2;
@@ -57,29 +59,25 @@ namespace NeuralNetwork
             return this;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Sets number input parameters. </summary>
-        ///
-        /// <param name="num">  Number of. </param>
-        ///
-        /// <returns>   A NNManager. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Sets the number input parameters.
+        /// </summary>
+        /// <param name="num">The number.</param>
+        /// <returns></returns>
         public NNManager SetNumInputParameters(int num)
         {
             _numInputParameters = num;
             return this;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Sets number neurons in hidden layer. </summary>
-        ///
-        /// <param name="hiddenNeurons">    The hidden neurons. </param>
-        /// <param name="numHiddenLayers">  (Optional) Number of hidden layers. </param>
-        ///
-        /// <returns>   A NNManager. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Sets the number neurons in hidden layer.
+        /// </summary>
+        /// <param name="hiddenNeurons">The hidden neurons.</param>
+        /// <param name="numHiddenLayers">The number hidden layers.</param>
+        /// <returns></returns>
         public NNManager SetNumNeuronsInHiddenLayer(int[] hiddenNeurons, int numHiddenLayers = 1)
         {
             _numHiddenLayers = numHiddenLayers;
@@ -87,26 +85,23 @@ namespace NeuralNetwork
             return this;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Sets number output parameters. </summary>
-        ///
-        /// <param name="numOutputs">   (Optional) Number of outputs. </param>
-        ///
-        /// <returns>   A NNManager. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Sets the number output parameters.
+        /// </summary>
+        /// <param name="numOutputs">The number outputs.</param>
+        /// <returns></returns>
         public NNManager SetNumOutputParameters(int numOutputs = 1)
         {
             _numOutputParameters = numOutputs;
             return this;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets training data from user. </summary>
-        ///
-        /// <returns>   The training data from user. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Gets the training data from user.
+        /// </summary>
+        /// <returns></returns>
         public NNManager GetTrainingDataFromUser()
         {
             PrintNewLine();
@@ -138,14 +133,11 @@ namespace NeuralNetwork
             return this;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets input data. </summary>
-        ///
-        /// <param name="message">  The message. </param>
-        ///
-        /// <returns>   An array of double. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        /// <summary>
+        /// Gets the input data.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         public double[] GetInputData(string message)
         {
             Console.Write(message, Color.Yellow);
@@ -181,14 +173,12 @@ namespace NeuralNetwork
             return values;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets expected result. </summary>
-        ///
-        /// <param name="message">  The message. </param>
-        ///
-        /// <returns>   An array of double. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Gets the expected result.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         public double[] GetExpectedResult(string message)
         {
             Console.Write(message, Color.Yellow);
@@ -224,12 +214,11 @@ namespace NeuralNetwork
             return values;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Tests network. </summary>
-        ///
-        /// <returns>   A NNManager. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Tests the network.
+        /// </summary>
+        /// <returns></returns>
         public NNManager TestNetwork()
         {
             Console.WriteLine("\tTesting Network", Color.Yellow);
@@ -258,12 +247,10 @@ namespace NeuralNetwork
             }
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Train network to minimum. </summary>
-        ///
-        /// <returns>   A NNManager. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        /// <summary>
+        /// Trains the network to minimum.
+        /// </summary>
+        /// <returns></returns>
         public NNManager TrainNetworkToMinimum()
         {
             var minError = GetDouble("\tMinimum Error: ", 0.000000001, 1.0);
@@ -275,12 +262,11 @@ namespace NeuralNetwork
             return this;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Train network to maximum. </summary>
-        ///
-        /// <returns>   A NNManager. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Trains the network to maximum.
+        /// </summary>
+        /// <returns></returns>
         public NNManager TrainNetworkToMaximum()
         {
             var maxEpoch = GetInput("\tMax Epoch: ", 1, int.MaxValue);
@@ -296,13 +282,10 @@ namespace NeuralNetwork
             PrintNewLine();
             return this;
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Train network. </summary>
-        ///
-        /// <returns>   A NNManager. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        /// <summary>
+        /// Trains the network.
+        /// </summary>
+        /// <returns></returns>
         public NNManager TrainNetwork()
         {
             Console.WriteLine("Network Training", Color.Yellow);
@@ -327,14 +310,11 @@ namespace NeuralNetwork
             return this;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Import network. </summary>
-        ///
-        /// <returns>   A NNManager. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        public
-            NNManager ImportNetwork()
+        /// <summary>
+        /// 导入现在有网络
+        /// </summary>
+        /// <returns></returns>
+        public NNManager ImportNetwork()
         {
             PrintNewLine();
             _network = ImportHelper.ImportNetwork();
@@ -353,12 +333,10 @@ namespace NeuralNetwork
             return this;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Export network. </summary>
-        ///
-        /// <returns>   A NNManager. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        /// <summary>
+        /// Exports the network.
+        /// </summary>
+        /// <returns></returns>
         public NNManager ExportNetwork()
         {
             PrintNewLine();
@@ -369,14 +347,11 @@ namespace NeuralNetwork
             return this;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Import datasets. </summary>
-        ///
-        /// <param name="name"> The name. </param>
-        ///
-        /// <returns>   A NNManager. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        /// <summary>
+        /// Imports the datasets.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns></returns>
         public NNManager ImportDatasets(string name)
         {
             PrintNewLine();
@@ -398,12 +373,11 @@ namespace NeuralNetwork
             return this;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Export datasets. </summary>
-        ///
-        /// <returns>   A NNManager. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Exports the datasets.
+        /// </summary>
+        /// <returns></returns>
         public NNManager ExportDatasets()
         {
             PrintNewLine();
@@ -414,28 +388,25 @@ namespace NeuralNetwork
             return this;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets the line. </summary>
-        ///
-        /// <returns>   The line. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Gets the line.
+        /// </summary>
+        /// <returns></returns>
         public string GetLine()
         {
             var line = Console.ReadLine();
             return line?.Trim() ?? string.Empty;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets an input. </summary>
-        ///
-        /// <param name="message">  The message. </param>
-        /// <param name="min">      The minimum. </param>
-        /// <param name="max">      The maximum. </param>
-        ///
-        /// <returns>   The input. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Gets the input.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="min">The minimum.</param>
+        /// <param name="max">The maximum.</param>
+        /// <returns></returns>
         public int? GetInput(string message, int min, int max)
         {
             Console.Write(message);
@@ -451,16 +422,13 @@ namespace NeuralNetwork
             return num.Value;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets the double. </summary>
-        ///
-        /// <param name="message">  The message. </param>
-        /// <param name="min">      The minimum. </param>
-        /// <param name="max">      The maximum. </param>
-        ///
-        /// <returns>   The double. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        /// <summary>
+        /// Gets the double.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="min">The minimum.</param>
+        /// <param name="max">The maximum.</param>
+        /// <returns></returns>
         public double GetDouble(string message, double min, double max)
         {
             Console.Write(message);
@@ -476,16 +444,14 @@ namespace NeuralNetwork
             return num;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets array input. </summary>
-        ///
-        /// <param name="message">  The message. </param>
-        /// <param name="min">      The minimum. </param>
-        /// <param name="numToGet"> Number of to gets. </param>
-        ///
-        /// <returns>   An array of int. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Gets the array input.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="min">The minimum.</param>
+        /// <param name="numToGet">The number to get.</param>
+        /// <returns></returns>
         public int[] GetArrayInput(string message, int min, int numToGet)
         {
             var nums = new int[numToGet];
@@ -507,12 +473,11 @@ namespace NeuralNetwork
             return nums;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets the number. </summary>
-        ///
-        /// <returns>   The number. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Gets the number.
+        /// </summary>
+        /// <returns></returns>
         public int? GetNumber()
         {
             var line = GetLine();
@@ -523,36 +488,33 @@ namespace NeuralNetwork
             return int.TryParse(line, out var num) ? num : 0;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets the double. </summary>
-        ///
-        /// <returns>   The double. </returns>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Gets the double.
+        /// </summary>
+        /// <returns></returns>
         public double GetDouble()
         {
             var line = GetLine();
             return line != null && double.TryParse(line, out var num) ? num : 0;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Print new line. </summary>
-        ///
-        /// <param name="numNewLines">  (Optional) Number of new lines. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Prints the new line.
+        /// </summary>
+        /// <param name="numNewLines">The number new lines.</param>
         public void PrintNewLine(int numNewLines = 1)
         {
             for (var i = 0; i < numNewLines; i++)
                 Console.WriteLine();
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Print underline. </summary>
-        ///
-        /// <param name="numUnderlines">    Number of underlines. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Prints the underline.
+        /// </summary>
+        /// <param name="numUnderlines">The number underlines.</param>
         public void PrintUnderline(int numUnderlines)
         {
             for (var i = 0; i < numUnderlines; i++)
@@ -560,20 +522,20 @@ namespace NeuralNetwork
             PrintNewLine(2);
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Writes an error. </summary>
-        ///
-        /// <param name="error">    The error. </param>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        /// <summary>
+        /// Writes the error.
+        /// </summary>
+        /// <param name="error">The error.</param>
         public void WriteError(string error)
         {
             Console.WriteLine(error, Color.Red);
             Exit();
         }
 
-        /// <summary>   Exits this object. </summary>
-		public void Exit()
+        /// <summary>
+        /// Exits this instance.
+        /// </summary>
+        public void Exit()
         {
             Console.WriteLine("Exiting...", Color.Yellow);
             Console.ReadLine();

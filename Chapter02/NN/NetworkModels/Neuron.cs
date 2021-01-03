@@ -6,18 +6,25 @@ namespace NeuralNetwork.NetworkModels
 {
     using EnsureThat;
 
-    /// <summary>   A neuron. </summary>
+    /// <summary>
+    /// 神经元(神经元是神经网络中计算的基本单位)
+    /// 神经元有时也被称为节点或单元。它接收来自其他节点或外部源的输入并计算输出。
+    /// 每个输入都有一个相关的权重（见图1—1中的w1和w2） ，它是根据输入信息的相对重要性进行分配的。
+    /// 节点将输入的加权和提供给函数 （激活函数，后面将详细介绍）。
+    /// 虽然这是对神经元是什么以及它能做什么的极端简化，但基本上就是这样。
+    /// </summary>
     public class Neuron
 	{
-		#region -- Properties --
+        #region -- Properties --
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets or sets the identifier. </summary>
-        ///
-        /// <value> The identifier. </value>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		public Guid Id { get; set; }
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
+        public Guid Id { get; set; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>   Gets or sets the input synapses. </summary>

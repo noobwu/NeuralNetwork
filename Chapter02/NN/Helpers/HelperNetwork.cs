@@ -3,9 +3,24 @@ using System.Collections.Generic;
 
 namespace NeuralNetwork.Helpers
 {
-	public class HelperNetwork
+    /// <summary>
+    /// 
+    /// </summary>
+    public class HelperNetwork
 	{
+		/// <summary>
+		///学习率(学习率通过控制权重大小和学习过程中网络的偏差变化来改变系统的整体学习速度)
+		/// </summary>
+		/// <value>
+		/// The learning rate.
+		/// </value>
 		public double LearningRate { get; set; }
+		/// <summary>
+		/// 动量(动量仅将先前权重更新的一小部分添加到当前权重更新中，动量用于防止系统收敛于局部最小值而非全局最小值)
+		/// </summary>
+		/// <value>
+		/// The momentum.
+		/// </value>
 		public double Momentum { get; set; }
 		public List<HelperNeuron> InputLayer { get; set; }
 		public List<List<HelperNeuron>> HiddenLayers { get; set; }

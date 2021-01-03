@@ -8,9 +8,16 @@ using Newtonsoft.Json;
 
 namespace NeuralNetwork.Helpers
 {
-	public static class ImportHelper
+    /// <summary>
+    ///  导入相关操作
+    /// </summary>
+    public static class ImportHelper
 	{
-		public static Network ImportNetwork()
+        /// <summary>
+        /// 导入现有网络
+        /// </summary>
+        /// <returns></returns>
+        public static Network ImportNetwork()
 		{
 			var dn = GetHelperNetwork();
 			if (dn == null) 
@@ -109,7 +116,11 @@ namespace NeuralNetwork.Helpers
 			}
 		}
 
-		private static HelperNetwork GetHelperNetwork()
+        /// <summary>
+        /// Gets the helper network.
+        /// </summary>
+        /// <returns></returns>
+        private static HelperNetwork GetHelperNetwork()
 		{
 			try
 			{
