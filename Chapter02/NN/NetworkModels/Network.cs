@@ -18,49 +18,39 @@ namespace NeuralNetwork.NetworkModels
         /// </summary>
         public double LearningRate { get; set; }
 
-      /// <summary>
-      /// 
-      /// </summary>
+        /// <summary>
+        /// 动量(动量仅将先前权重更新的一小部分添加到当前权重更新中，动量用于防止系统收敛于局部最小值而非全局最小值)
+        /// </summary>
 
         public double Momentum { get; set; }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets or sets the input layer. </summary>
-        ///
-        /// <value> The input layer. </value>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// 输入层(这是网络的初始数据。对于每个输入，其输出到隐藏层的值是初始输入值)
+        /// </summary>
 
         public List<Neuron> InputLayer { get; set; }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets or sets the hidden layers. </summary>
-        ///
-        /// <value> The hidden layers. </value>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// 隐藏层(这是网络的核心和灵魂，也是程序发挥魔力的根本。该层中的神经元为每个输入配置权重。
+        /// 这些权重随机设置初始值，并在网络训练时进行调整，以使神经元的输出更接近预期结果（如果幸运的话）)
+        /// </summary>
 
         public List<List<Neuron>> HiddenLayers { get; set; }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets or sets the output layer. </summary>
-        ///
-        /// <value> The output layer. </value>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// 输出层（这是神经网络在执行计算后得到的输出。简单案例中的输出将设置为true， false，或者on，off。
+        /// 神经元为每个输入配置权重，这些输入来自先前的隐藏层。虽然通常只有一个输出神经元，但如果需要或想要多个输出神经元，也可以设置更多神经元。）
+        /// </summary>
 
         public List<Neuron> OutputLayer { get; set; }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// <summary>   Gets or sets the mirror layer. </summary>
-        ///
+        /// <summary> Gets or sets the mirror layer. </summary>
         /// <value> The mirror layer. </value>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public List<Neuron> MirrorLayer { get; set; }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>   Gets or sets the canonical layer. </summary>
-        ///
         /// <value> The canonical layer. </value>
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public List<Neuron> CanonicalLayer { get; set; }
         #endregion

@@ -23,13 +23,13 @@ namespace NeuralNetwork.Helpers
 			if (dn == null) 
 			    return null;
 
-			var network = new Network();
-			var allNeurons = new List<Neuron>();
+			var network = new Network();//新网络
+			var allNeurons = new List<Neuron>();//神经元列表
 
-			network.LearningRate = dn.LearningRate;
-			network.Momentum = dn.Momentum;
+			network.LearningRate = dn.LearningRate;//学习率
+			network.Momentum = dn.Momentum;//动量
 
-			//Input Layer
+			//导入输入层
 			foreach (var n in dn.InputLayer)
 			{
 				var neuron = new Neuron
@@ -45,7 +45,7 @@ namespace NeuralNetwork.Helpers
 				allNeurons.Add(neuron);
 			}
 
-			//Hidden Layers
+			//导入隐藏层
 			foreach (var layer in dn.HiddenLayers)
 			{
 				var neurons = new List<Neuron>();
@@ -67,7 +67,7 @@ namespace NeuralNetwork.Helpers
 				network.HiddenLayers?.Add(neurons);
 			}
 
-			//Export Layer
+		    //导入输出层
 			foreach (var n in dn.OutputLayer)
 			{
 				var neuron = new Neuron
